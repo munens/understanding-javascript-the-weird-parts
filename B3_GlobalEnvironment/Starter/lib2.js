@@ -1,0 +1,1 @@
+window.libName = window.libName || 'lib2';
