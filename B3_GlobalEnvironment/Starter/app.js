@@ -253,15 +253,15 @@ function greet(){
 }
 
 console.log(greet()); // { firstname: 'Munene' }
-*/ 
+*/
 /*
-var 
+var
 	// firstname of the person
-	firstname, 
-	
+	firstname,
+
 	// the last name of the person
-	lastname, 
-	
+	lastname,
+
 	// the langiage that the person speaks that is in additon,
 	// to english if necessary:
 	language;
@@ -296,7 +296,7 @@ function greet(name){
 
 var greetFunc = function(name){
 	return '2. hello ' + name;
-}('Munesh!'); 
+}('Munesh!');
 
 console.log(greetFunc) // '2. hello Munesh!
 
@@ -311,7 +311,7 @@ var greeting = 'hello!';
 
 	var greeting = 'You guy?';
 	console.log(greeting); // 'You guy?'
-	
+
 	console.log(global.greeting); // 'hello!'
 
 }(window, 'MK2'))
@@ -323,7 +323,7 @@ console.log(greeting); // 'hello!'
 
 function greet(whattosay){
 	return function(name){
-		console.log(whattosay + ' ' + name); // 'Vipi Munesh' 
+		console.log(whattosay + ' ' + name); // 'Vipi Munesh'
 	}
 }
 
@@ -331,7 +331,7 @@ greet('Vipi')('Munesh');
 
 // is the same as:
 var sayHi = greet('Vipi');
-sayHi('Munesh!'); // 'Vipi Munesh' 
+sayHi('Munesh!'); // 'Vipi Munesh'
 
 */
 
@@ -342,7 +342,7 @@ function buildFunctions(){
 	for(var i = 0; i < 3; i++){
 		arr.push(function(){
 			console.log(i);
-		}); 
+		});
 	}
 	return arr;
 }
@@ -363,7 +363,7 @@ function buildFunctions2(){
 				return function(){
 					console.log(j);
 				}
-			}(i))); 
+			}(i)));
 	}
 
 	return arr;
@@ -386,7 +386,7 @@ function greet(language){
 
 		if(language == 'es'){
 			console.log('hola ' + firstname + ' ' + lastname);
-		} 
+		}
 	}
 }
 
@@ -483,7 +483,7 @@ console.log(arr2); // [2, 4, 6]
 
 var arr3 = mapForEach(arr, function(item){
 	if(item > 2){
-		return item; 
+		return item;
 	}
 })
 console.log(arr3); // [3]
@@ -507,11 +507,12 @@ function checkPastLimitSimplified2(limiter){
 	}.bind(this, limiter);
 }
 
-var arr6 = mapForEach(arr, checkPastLimitSimplified2(2)); 
+var arr6 = mapForEach(arr, checkPastLimitSimplified2(2));
 console.log(arr6); // [false, false, true]
 
 */
 
+/*
 var person = {
 	firstname: 'DEFAULT',
 	lastname: 'DEFAULT',
@@ -540,4 +541,91 @@ munesh.__proto__ = person;
 console.log(munesh.firstname); // munesh
 console.log(munesh.getFullName()); // munesh DEFAULT
 
+person.firstname = 'new DEFAULT';
+console.log(munene.__proto__.firstname); // new DEFAULT
+console.log(munesh.__proto__.firstname); // new DEFAULT
 
+*/
+
+var person = {
+	firstname: 'Munene',
+	lastname: 'Kaumbutho'
+}
+
+var munene = {
+	firstname: 'Munene',
+	lastname: 'Kaumbutho',
+	getFullName: function(){
+		return this.firstname + ' ' + this.lastname;
+	}
+}
+
+// DONT EVER DO THIS!!!!
+
+person.__proto__ = munene;
+
+for (var prop in person) {
+	console.log(prop + ': ' + person[prop])
+}
+
+for (var prop in person) {
+	if (person.hasOwnProperty(prop)) {
+		console.log(prop + ': ' + person[prop])
+	}
+}
+
+var munesh = {
+	weight: 75,
+	height: 181
+};
+
+var munizle = {
+	degree: 'BA',
+	country: 'Kenya'
+}
+
+// using extend, all of these properties can be combined into one:
+var extended = _.extend(munene, munesh, munizle);
+
+console.log(extended); // {"firstname":"Munene","lastname":"Kaumbutho","weight":75,"height":181,"degree":"BA","country":"Kenya"}
+
+// we can even create our own extend function:
+
+function extend(obj1) {
+	// if only one obj provided:
+	if (arguments.length === 1) {
+		return obj1;
+	}
+
+	for (var i = 1; i < arguments.length; i++) {
+		var newObj = arguments[i];
+		for (var key in newObj) {
+			obj1[key] = newObj[key]
+		}
+	}
+
+	return obj1;
+}
+
+console.log('extend(munene):', extend(munene));
+console.log('extend(munene, munesh):', extend(munene, munesh));
+console.log('extend(munene, munesh, munizle):', extend(munene, munesh, munizle));
+
+// recursive:
+function extend2(currentObj) {
+	// if only one obj provided:
+	if (arguments.length === 1) {
+		return currentObj;
+	}
+
+	var newObj = arguments[1];
+	for (var key in newObj) {
+		currentObj[key] = newObj[key];
+	}
+
+	return extend2(currentObj);
+}
+
+console.log('extend2(munene):', extend2(munene));
+console.log('extend2(munene, munesh):', extend2(munene, munesh));
+console.log('extend2(munene, munesh, munizle):', extend2(munene, munesh, munizle));
