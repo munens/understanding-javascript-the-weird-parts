@@ -183,7 +183,7 @@ if (!Object.create) {
 */
 
 // lec. 64
-
+/*
 function Person (firstname, lastname) {
 
   this.firstname = firstname;
@@ -196,10 +196,10 @@ function Person (firstname, lastname) {
 
 const munene = new Person('Munene', 'Kaumbutho');
 
-console.log(munene); // Person {firstname: "Munene", lastname: "Kaumbutho", greet: ƒ}
-console.log(munene.greet()) // Hello, Munene
+// console.log(munene); // Person {firstname: "Munene", lastname: "Kaumbutho", greet: ƒ}
+// console.log(munene.greet()) // Hello, Munene
+*/
 
-/*
 class Person {
 
   constructor(firstname, lastname) {
@@ -212,10 +212,9 @@ class Person {
   }
 }
 
-const munesh = new Person('Munesh', 'Kaumbutho');
-console.log(munesh); // Person {firstname: "Munesh", lastname: "Kaumbutho", greet: ƒ}
-console.log(munesh.greet()) // Hello, Munene
-*/
+// const munesh = new Person2('Munesh', 'Kaumbutho');
+// console.log(munesh); // Person {firstname: "Munesh", lastname: "Kaumbutho"}
+// console.log(munesh.greet()) // Hello, Munene
 
 class InformalPerson extends Person {
   constructor(firstname, lastname) {
@@ -228,4 +227,4 @@ class InformalPerson extends Person {
 }
 
 const mk = new InformalPerson('Munizle', 'Kaumbutho');
-console.log(mk)
+console.log(mk); // InformalPerson {firstname: "Munizle", lastname: "Kaumbutho"}
